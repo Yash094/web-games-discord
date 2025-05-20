@@ -25,8 +25,8 @@
 
 ### 1. Clone the Repository
 ```bash
-git clone <your-repo-url>
-cd <your-repo-directory>
+git clone https://github.com/Yash094/web-games-discord
+cd web-games-discord
 ```
 
 ### 2. Install Dependencies
