@@ -11,8 +11,8 @@ const ENGINE_ACCESS_TOKEN = process.env.ENGINE_ACCESS_TOKEN;
 const THIRDWEB_SECRET_KEY = process.env.THIRDWEB_SECRET_KEY;
 const ENGINE_URL = 'https://engine.thirdweb.com/v1/accounts';
 const ENGINE_TX_URL = 'https://engine.thirdweb.com/v1/write/transaction';
-const CHAIN = 8453; // BASE chain ID
-const CLIENT_ID = process.env.CLIENT_ID;
+const CHAIN = 137; // BASE chain ID
+const CLIENT_ID = process.env.THIRDWEB_CLIENT_ID;
 const client = createThirdwebClient({ clientId: CLIENT_ID });
 
 // Mongoose schema and model for user wallets
@@ -88,7 +88,7 @@ export async function addBalance(userId, amount, interaction = null) {
   const wallet = await getOrCreateWallet(userId);
   // Use the thirdweb.com/pay URL directly, amount in wei
   const url = `https://thirdweb.com/pay?chainId=8453` +
-    `&recipientAddress=${wallet.address}` +
+    `&recipientAddress=${wallet.smartAccountAddress}` +
     `&tokenAddress=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE` +
     `&amount=${ethToWeiString(amount)}` +
     `&clientId=d391b93f5f62d9c15f67142e43841acc`;
@@ -130,25 +130,25 @@ export async function sendWinnings(userId, amount, interaction = null) {
   const wallet = await getOrCreateWallet(userId);
   const data = await sendEngineTransaction({
     from: TREASURY_WALLET,
-    to: wallet.address,
+    to: wallet.smartAccountAddress,
     amount,
   });
   if (interaction) {
     await interaction.user.send(
-      `Your winnings of ${amount} tokens have been sent to your wallet: ${wallet.address}\nTransaction result: ${JSON.stringify(data)}`
+      `Your winnings of ${amount} tokens have been sent to your wallet: ${wallet.smartAccountAddress}\nTransaction result: ${JSON.stringify(data)}`
     );
   }
-  console.log(chalk.green(`[Onchain] Sent winnings of ${amount} tokens from treasury to user ${userId} (${wallet.address})`));
+  console.log(chalk.green(`[Onchain] Sent winnings of ${amount} tokens from treasury to user ${userId} (${wallet.smartAccountAddress})`));
 }
 
 export async function deductBalance(userId, amount) {
   const wallet = await getOrCreateWallet(userId);
   const data = await sendEngineTransaction({
-    from: wallet.address,
+    from: wallet.smartAccountAddress,
     to: TREASURY_WALLET,
     amount,
   });
-  console.log(chalk.yellow(`[Onchain] Deducted ${amount} tokens from user ${userId} (${wallet.address}) to treasury`));
+  console.log(chalk.yellow(`[Onchain] Deducted ${amount} tokens from user ${userId} (${wallet.smartAccountAddress}) to treasury`));
 }
 
 export async function getBalance(userId) {

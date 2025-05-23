@@ -1,6 +1,6 @@
 # Web3 Discord Games
 
-<!-- Place your project logo and screenshots here -->
+Watch the bot in action: [**Web3 Discord Games Demo Video**](https://www.loom.com/share/ecf179bfc983464899e8fb4897306a13?sid=a748c820-e017-482b-894a-dce9bf043cbe)
 
 ---
 
@@ -94,32 +94,3 @@ export const TREASURY_WALLET = 'YOUR_TREASURY_WALLET_ADDRESS';
 ```bash
 npm start
 ```
-
----
-
-## Support
-For help with Engine Cloud, see the [thirdweb Engine Cloud changelog](https://blog.thirdweb.com/changelog/introducing-engine-cloud/) and [docs](https://portal.thirdweb.com/engine/overview).
-
-For Discord bot issues, open an issue in this repo or reach out to the maintainers.
-
----
-
-<!-- Add images/screenshots below as needed -->
-
-# Onchain Casino Discord Bot
-
-A Discord bot for casino-style games with onchain wallet integration. Built with [discord.js](https://discord.js.org/) v14+.
-
-## Features
-- Onchain wallet balance checking
-- Wallet refill
-- Casino games: Slots, Roulette, Coin Flip
-- Modular command structure
-
-## Commands
-- `/balance` — Check your onchain wallet balance
-- `/refill` — Refill your onchain wallet with test tokens
-- `/slots` — Play the slots game
-- `/roulette` — Play the roulette game
-- `/coinflip` — Flip a coin and try your luck!
-- `/help` — Show help message
